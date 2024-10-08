@@ -54,6 +54,8 @@ function App() {
         </Panel>
         <PanelResizeHandle className={"hover:bg-purple-500 active:bg-purple-500 transition-colors duration-300"}/>
         <Panel defaultSize={80}>
+          <div className={"h-10 w-full border-r border-b border-[#e0e0e0] cursor-pointer"} data-tauri-drag-region={"true"}>
+          </div>
           <MainView/>
         </Panel>
       </PanelGroup>
