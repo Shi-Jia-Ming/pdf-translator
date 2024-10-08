@@ -10,16 +10,18 @@ import MainView from "./components/MainView";
 function App() {
   const [needAnimation, setNeedAnimation] = useState<boolean>(false);
   const [leftPanelSize, setLeftPanelSize] = useState<number>(20);
+
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState<boolean>(false);
+  const [isWindowMaximized, setIsWindowMaximized] = useState<boolean>(false);
 
   const leftPanelRef = useRef<ImperativePanelHandle>(null);
 
   const collapseLeftPanel = () => {
     setNeedAnimation(true);
     setTimeout(() => {
-        setNeedAnimation(false);
+      setNeedAnimation(false);
     }, 200);
-    if (leftPanelRef.current?.getSize() === 0) {
+    if (isLeftPanelCollapsed) {
       leftPanelRef.current?.resize(leftPanelSize);
       setIsLeftPanelCollapsed(false);
     } else {
@@ -27,6 +29,11 @@ function App() {
       leftPanelRef.current?.resize(0);
       setIsLeftPanelCollapsed(true);
     }
+  }
+
+  async function handleMaximize() {
+    setIsWindowMaximized(!isWindowMaximized);
+    appWindow.toggleMaximize();
   }
 
   return (
@@ -38,7 +45,7 @@ function App() {
           id={"sidebar-collapse-button"}
           onClick={collapseLeftPanel}
         >
-          <img alt={""} src={"/icons/indentation-right.svg"} className={"size-5"}/>
+          <img alt={""} src={isLeftPanelCollapsed ? "/icons/indentation-right.svg" : "/icons/indentation-left.svg"} className={"size-5"}/>
         </button>
       </div>
       <div className={"w-full h-except-10 border-r border-[#e0e0e0] transition-color duration-100 delay-100"} style={{backgroundColor: isLeftPanelCollapsed ? '#ffffff' : '#f6f6f6'}}>
@@ -67,8 +74,8 @@ function App() {
         </button>
       </div>
       <div className={"h-10 w-12 flex align-middle justify-center hover:bg-gray-100 active:bg-gray-200"} id={"maximize-button-container"}>
-        <button className={"size-full flex justify-center items-center"} onClick={() => {appWindow?.toggleMaximize().then(() => {console.log('toggleMax')});}}>
-          <img alt={""} src={"/icons/scale-min.svg"} className={"size-4"}/>
+        <button className={"size-full flex justify-center items-center"} onClick={handleMaximize}>
+          <img alt={""} src={isWindowMaximized ? "/icons/scale-min.svg" : "/icons/scale-max.svg"} className={"size-4"}/>
         </button>
       </div>
       <div className={"h-10 w-12 flex align-middle justify-center hover:bg-[#e93147] active:bg-[#f1626c]"} id={"close-button-container"}>
