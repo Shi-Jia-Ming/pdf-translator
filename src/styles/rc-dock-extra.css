@@ -1,0 +1,30 @@
+.dock-bar.drag-initiator {
+    @apply h-10;
+
+    .dock-nav {
+        @apply h-full;
+
+        .dock-tab {
+            @apply h-full;
+
+            .dock-tab-btn {
+                @apply min-w-28 size-full flex align-middle justify-center p-0;
+
+                .drag-initiator {
+                    @apply flex justify-center;
+                    align-items: center;
+                    text-align: center;
+                    width: 100%;
+
+                    .dock-tab-close-btn {
+                        top: 0.65rem;
+                    }
+                }
+            }
+        }
+
+        .dock-extra-content {
+            @apply hidden;
+        }
+    }
+}

@@ -15,13 +15,29 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["http://118.26.36.198:31188/*", "http://47.121.201.169:39770/*"]
+      },
+      "window": {
+        "all": true
+      },
+      "path": {
+        "all": true
       }
     },
     "windows": [
       {
-        "title": "common-react-tauri",
-        "width": 800,
-        "height": 600
+        "label": "main",
+        "fullscreen": false,
+        "height": 800,
+        "width": 1000,
+        "resizable": true,
+        "decorations": false,
+        "transparent": true,
+        "title": "common-react-tauri"
       }
     ],
     "security": {

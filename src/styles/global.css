@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white dark:bg-gray-950 size-full overflow-hidden;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+.w-except-10 {
+  width: calc(100% - 3rem);
+}
+
+.w-except-11 {
+    width: calc(100% - 2.75rem);
+}
+
+.h-except-10 {
+  height: calc(100% - 2.5rem);
+}
+
+.w-0\.75 {
+    width: 0.1875rem;
+}
+
+button {
+    box-shadow: none;
+    border-radius: 0%;
+}
