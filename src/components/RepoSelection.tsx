@@ -5,11 +5,11 @@ import {WorkDirectoryContext} from "../states/repository.ts";
 import {open} from "@tauri-apps/api/dialog";
 import {path} from "@tauri-apps/api";
 
-function RepoItem({name, path, needPath}: { name: string, path: string, needPath: boolean }) {
+function RepoItem({name, path, needPath, iconSize, iconColor}: { name: string, path: string, needPath: boolean, iconSize: number, iconColor?: string }) {
     return (
       <div
         className={"flex w-full h-12 pl-2 pr-2 rounded-lg items-center justify-start hover:bg-gray-200 active:bg-gray-300 gap-3"}>
-        <NameImage name={name} size={needPath ? 27 : 20} color={'#8f8f8f'}/>
+        <NameImage name={name} size={iconSize} color={iconColor ? iconColor : '#8f8f8f'}/>
         <div className={"flex flex-col items-start justify-center"}>
           <div className={"text-[1rem]"}>{name}</div>
           <div hidden={!needPath} className={"text-gray-400 text-[0.8rem]"}>{path}</div>
@@ -40,7 +40,7 @@ export default function RepoSelection() {
                      className={"pl-2 pr-2 rounded-lg w-[200px] h-10 flex justify-start items-center hover:bg-gray-200 active:bg-gray-300"}>
         <div id={"repo-name"}
              className={"text-[0.8rem] h-5 w-[85%] overflow-hidden whitespace-nowrap text-ellipsis text-left flex items-center"}>
-          {workspace === '' ? '暂未打开任何仓库' : RepoItem({name: workspace, path: '', needPath: false})}
+          {workspace === '' ? '暂未打开任何仓库' : RepoItem({name: workspace, path: '', needPath: false, iconSize: 20})}
         </div>
         <div id={"switch-icon"} className={"w-[15%] flex justify-end"}>
           <img alt={""} src={"/icons/chevron-up.svg"} className={"size-5"}/>
@@ -66,7 +66,7 @@ export default function RepoSelection() {
                 最近的仓库
               </div>
               <button className={"w-full h-12"}>
-                <RepoItem name={"test"} path={"C:/Users/xxx/xxx"} needPath={true}/>
+                <RepoItem name={"test"} path={"C:/Users/xxx/xxx"} needPath={true} iconSize={27}/>
               </button>
             </div>
           </div>
