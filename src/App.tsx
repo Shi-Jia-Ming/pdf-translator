@@ -6,6 +6,7 @@ import "./styles/global.css";
 import "./styles/rc-dock-extra.css";
 import { ImperativePanelHandle, Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import MainView from "./components/MainView";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const [needAnimation, setNeedAnimation] = useState<boolean>(false);
@@ -39,9 +40,9 @@ function App() {
   return (
     <div className={"size-full flex flex-row"}>
     <div className={"h-full w-11 flex flex-col align-middle justify-center"} id={"sidebar"}>
-      <div className={"h-10 w-11 border-b border-[#e0e0e0]"}>
+      <div className={"h-10 w-11 border-b border-[#e0e0e0] bg-[#fcfcfc]"}>
         <button
-          className={"p-2.5 size-full rounded-xl text-black bg-white hover:bg-gray-100 transition duration-200 flex align-middle justify-center"}
+          className={"p-[0.55rem] size-full rounded-xl text-black hover:bg-gray-100 transition duration-200 flex align-middle justify-center"}
           id={"sidebar-collapse-button"}
           onClick={collapseLeftPanel}
         >
@@ -54,14 +55,11 @@ function App() {
     <div className={"h-full w-except-11"} id={"app-main"}>
       <PanelGroup direction="horizontal" className={"size-full"} autoSaveId={"persistence"}>
         <Panel collapsible defaultSize={leftPanelSize} className={`transition-width ${needAnimation ? 'duration-200' : ''}`} ref={leftPanelRef}>
-          <div className={"h-10 w-full border-r border-b border-[#e0e0e0] cursor-pointer"} data-tauri-drag-region={"true"}>
-          </div>
-          <div className={"h-except-10 w-full bg-[#f6f6f6] border-r border-[#e0e0e0]"}>
-          </div>
+          <Sidebar/>
         </Panel>
         <PanelResizeHandle className={"hover:bg-purple-500 active:bg-purple-500 transition-colors duration-300"}/>
         <Panel defaultSize={80}>
-          <div className={"h-10 w-full border-r border-b border-[#e0e0e0] cursor-pointer"} data-tauri-drag-region={"true"}>
+          <div className={"h-10 w-full border-r border-b border-[#e0e0e0] cursor-pointer bg-[#fcfcfc]"} data-tauri-drag-region={"true"}>
           </div>
           <MainView/>
         </Panel>

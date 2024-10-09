@@ -16,7 +16,7 @@ body {
 }
 
 .w-except-11 {
-    width: calc(100% - 2.75rem);
+  width: calc(100% - 2.75rem);
 }
 
 .h-except-10 {
@@ -24,10 +24,14 @@ body {
 }
 
 .w-0\.75 {
-    width: 0.1875rem;
+  width: 0.1875rem;
 }
 
 button {
-    box-shadow: none;
-    border-radius: 0%;
+  box-shadow: none;
+  border-radius: 0%;
+}
+
+button {
+  border: 0cm;
 }
