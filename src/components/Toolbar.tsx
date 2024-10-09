@@ -58,7 +58,10 @@ export default function Toolbar() {
       className={"size-full flex justify-between items-center cursor-pointer"} id={"tool-bar"}
       data-tauri-drag-region={"true"}
     >
-      <div className={""} id={"function-area"}>
+      <div className={""} id={"function-area flex flex-row"}>
+        <div className={"h-7 w-7"} id={"app-icon"}>
+          <img alt={""} src={"/icon.png"} className={"size-4"}/>
+        </div>
         <div className={"h-7 w-full"}>
           <RepoSelection historySpace={historySpace} addHistorySpace={addHistorySpace}/>
         </div>
