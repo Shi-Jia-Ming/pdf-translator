@@ -8,7 +8,7 @@ import {path} from "@tauri-apps/api";
 function RepoItem({name, path, needPath, iconSize, iconColor}: { name: string, path: string, needPath: boolean, iconSize: number, iconColor?: string }) {
     return (
       <div
-        className={"flex w-full h-12 pl-2 pr-2 rounded-lg items-center justify-start hover:bg-gray-200 active:bg-gray-300 gap-3"}>
+        className={"flex w-full h-12 pr-2 pl-2 rounded-lg items-center justify-start hover:bg-gray-200 active:bg-gray-300 gap-3"}>
         <NameImage name={name} size={iconSize} color={iconColor ? iconColor : '#8f8f8f'}/>
         <div className={"flex flex-col items-start justify-center"}>
           <div className={"text-[1rem]"}>{name}</div>
@@ -35,20 +35,20 @@ export default function RepoSelection() {
   }
 
   return (
-    <Popover className={"relative size-full bg-[#f6f6f6] border-t border-[#e0e0e0"}>
+    <Popover className={"relative size-full"}>
       <PopoverButton id={"repo-selection"}
-                     className={"pl-2 pr-2 rounded-lg w-[200px] h-10 flex justify-start items-center hover:bg-gray-200 active:bg-gray-300"}>
+                     className={"rounded-lg h-full flex justify-start items-center hover:bg-gray-200 active:bg-gray-300"}>
         <div id={"repo-name"}
-             className={"text-[0.8rem] h-5 w-[85%] overflow-hidden whitespace-nowrap text-ellipsis text-left flex items-center"}>
-          {workspace === '' ? '暂未打开任何仓库' : RepoItem({name: workspace, path: '', needPath: false, iconSize: 20})}
+             className={"text-[0.8rem] h-5 w-[85%] overflow-hidden whitespace-nowrap text-ellipsis text-left flex justify-start items-center"}>
+          {workspace === '' ? <div className={"pl-2 pr-2"}>暂未打开任何仓库</div> : RepoItem({name: workspace, path: '', needPath: false, iconSize: 20})}
         </div>
         <div id={"switch-icon"} className={"w-[15%] flex justify-end"}>
-          <img alt={""} src={"/icons/chevron-up.svg"} className={"size-5"}/>
+          <img alt={""} src={"/icons/chevron-down.svg"} className={"size-5"}/>
         </div>
       </PopoverButton>
       <PopoverPanel
         transition
-        anchor={"top start"}
+        anchor={"bottom start"}
         className={"divide-y divide-white/5 bg-white text-sm/6 border border-black-100 rounded-lg p-2 w-[300px] h-[400px] shadow-lg transition duration-200 ease-in-out  [--anchor-gap:var(--spacing-5)] data-[closed]:translate-y-1 data-[closed]:opacity-0"}>
         {({close}) => (
           <div className={"divide-y divide-solid"}>
