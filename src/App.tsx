@@ -1,24 +1,23 @@
 import {useRef, useState} from "react";
 // import reactLogo from "./assets/react.svg";
-import {appWindow} from "@tauri-apps/api/window";
 import "./styles/global.css";
 import "./styles/rc-dock-extra.css";
 import {ImperativePanelHandle, Panel, PanelGroup, PanelResizeHandle} from "react-resizable-panels";
 import MainView from "./components/MainView";
 import Sidebar from "./components/Sidebar";
-import {WorkDirectoryContext} from "./states/repository";
-import RepoSelection from "./components/RepoSelection.tsx";
+import {WorkDirectoryContext} from "./store/repository";
+import Toolbar from "./components/Toolbar.tsx";
 
 function App() {
   const [needAnimation, setNeedAnimation] = useState<boolean>(false);
   const [leftPanelSize, setLeftPanelSize] = useState<number>(20);
 
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState<boolean>(false);
-  const [isWindowMaximized, setIsWindowMaximized] = useState<boolean>(false);
 
   const leftPanelRef = useRef<ImperativePanelHandle>(null);
 
   const [workspace, setWorkspace] = useState('');
+  const [workPath, setWorkPath] = useState('');
 
   const collapseLeftPanel = () => {
     setNeedAnimation(true);
@@ -35,47 +34,11 @@ function App() {
     }
   }
 
-  async function handleMaximize() {
-    setIsWindowMaximized(!isWindowMaximized);
-    await appWindow.toggleMaximize();
-  }
-
   return (
-    <WorkDirectoryContext.Provider value={{workspace, setWorkspace}}>
+    <WorkDirectoryContext.Provider value={{workspace, workPath, setWorkspace, setWorkPath}}>
       <div className={"size-full flex flex-col"} id={"main-window"}>
-        <div className={"w-full h-10 flex justify-between items-center cursor-pointer"} id={"tool-bar"} data-tauri-drag-region={"true"}>
-          <div className={""} id={"function-area"}>
-            <div className={"h-7 w-full"}>
-              <RepoSelection/>
-            </div>
-          </div>
-          <div id={"control-button-group-area"} className={"absolute right-0 top-0 h-10 w-auto flex flex-row z-10"}>
-            <div className={"h-10 w-12 flex align-middle justify-center hover:bg-gray-100 active:bg-gray-200"}
-                 id={"minimize-button-container"}>
-              <button className={"size-full flex justify-center items-center"} onClick={() => {
-                appWindow?.minimize().then(() => {
-                })
-              }}>
-                <img alt={""} src={"/icons/minimize.svg"} className={"size-4"}/>
-              </button>
-            </div>
-            <div className={"h-10 w-12 flex align-middle justify-center hover:bg-gray-100 active:bg-gray-200"}
-                 id={"maximize-button-container"}>
-              <button className={"size-full flex justify-center items-center"} onClick={handleMaximize}>
-                <img alt={""} src={isWindowMaximized ? "/icons/scale-min.svg" : "/icons/scale-max.svg"}
-                     className={"size-4"}/>
-              </button>
-            </div>
-            <div className={"h-10 w-12 flex align-middle justify-center hover:bg-[#e93147] active:bg-[#f1626c]"}
-                 id={"close-button-container"}>
-              <button className={"size-full flex justify-center items-center"} onClick={() => {
-                appWindow?.close().then(() => {
-                })
-              }}>
-                <img alt={""} src={"/icons/close.svg"} className={"size-4"}/>
-              </button>
-            </div>
-          </div>
+        <div className={"w-full h-10"} id={"tool-bar-container"}>
+          <Toolbar/>
         </div>
         <div className={"w-full h-except-10 flex"} id={"app-main"}>
           <div

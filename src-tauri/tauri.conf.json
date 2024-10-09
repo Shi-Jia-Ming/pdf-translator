@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "common-react-tauri",
+    "productName": "pdf-translator",
     "version": "0.0.0"
   },
   "tauri": {
@@ -45,7 +45,7 @@
         "resizable": true,
         "decorations": false,
         "transparent": true,
-        "title": "common-react-tauri"
+        "title": "pdf-translator"
       }
     ],
     "security": {
@@ -54,7 +54,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "common.react.tauri",
+      "identifier": "cn.edu.hit.pdf-translator",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
