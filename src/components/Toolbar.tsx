@@ -39,18 +39,20 @@ export default function Toolbar() {
 
   useEffect(() => {
     // 获取最近打开的仓库
-    // 从本地存储中获取
-    invoke<string>('read_history_file').then((historySrc: string) => {
-      try {
-        const history: Array<{
-          name: string,
-          path: string
-        }> = JSON.parse(historySrc);
-        setHistorySpace(history);
-      } catch (e) {
-        console.error(e);
-      }
-    });
+    // 从本地存储中获取 TODO 如果不设置定时器，会因为Rust端的异步操作导致获取该命令失败
+    setTimeout(() => {
+      invoke<string>('read_history_file').then((historySrc: string) => {
+        try {
+          const history: Array<{
+            name: string,
+            path: string
+          }> = JSON.parse(historySrc);
+          setHistorySpace(history);
+        } catch (e) {
+          console.error(e);
+        }
+      });
+    }, 500);
   });
 
   return (
@@ -58,11 +60,11 @@ export default function Toolbar() {
       className={"size-full flex justify-between items-center cursor-pointer"} id={"tool-bar"}
       data-tauri-drag-region={"true"}
     >
-      <div className={""} id={"function-area flex flex-row"}>
-        <div className={"h-7 w-7"} id={"app-icon"}>
+      <div className={"flex flex-row"} id={"function-area"}>
+        <div className={"h-7 w-7 flex items-center justify-center ml-2 mr-1"} id={"app-icon"}>
           <img alt={""} src={"/icon.png"} className={"size-4"}/>
         </div>
-        <div className={"h-7 w-full"}>
+        <div className={"h-7"}>
           <RepoSelection historySpace={historySpace} addHistorySpace={addHistorySpace}/>
         </div>
       </div>

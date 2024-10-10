@@ -81,6 +81,8 @@ export default function RepoSelection({historySpace, addHistorySpace}: {historyS
               </div>
               {historySpace.map((item) => (
                 <button
+                  id={item.path}
+                  key={item.path}
                   className={"w-full h-12"}
                   onClick={() => {updateWorkspace(item.name, item.path); close();}}
                 >
