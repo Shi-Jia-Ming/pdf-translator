@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^2.1.9",
     "@tauri-apps/api": "^1.6.0",
+    "mac-scrollbar": "^0.13.6",
     "rc-dock": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

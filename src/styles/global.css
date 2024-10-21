@@ -40,3 +40,19 @@ button {
 button:focus-visible {
   border: none;
 }
+
+.cannot-select {
+  user-select: none;
+}
+
+.overflow-hide {
+  @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+.cannot-select {
+  /* can not select */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AreaHighlight, Content, IHighlight, NewHighlight, PdfHighlighter, PdfLoader, Popup, ScaledPosition, Tip, Highlight } from "react-pdf-highlighter";
 import "react-pdf-highlighter/dist/style.css";
 
+// TODO performances of pdf viewer is not good, need to optimize
 const resetHash = () => {
 
 }

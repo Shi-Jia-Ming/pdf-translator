@@ -16,8 +16,8 @@ const defaultLayout: LayoutData = {
             {
                 id: 'root',
                 tabs: [
-                    {id: 'tab1', title: 'tab1', content: <Pdf/>, closable: true},
-                    {id: 'tab2', title: 'tab2', content: <DefaultComponent/>, closable: true}
+                    {id: 'tab1', title: 'tab1', content: <DefaultComponent/>, closable: true},
+                    {id: 'tab2', title: 'tab2', content: <Pdf/>, closable: true}
                 ]
             }
         ]
