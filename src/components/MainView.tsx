@@ -1,16 +1,9 @@
-import DockLayout, { BoxData, DropDirection, LayoutBase, LayoutData, PanelData, TabData } from "rc-dock";
+import DockLayout, { DropDirection, LayoutBase, LayoutData, PanelData, TabData } from "rc-dock";
 import "rc-dock/dist/rc-dock.css";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Pdf from "./Pdf";
 import { PdfContext } from "../store/pdf";
-import { WorkDirectoryContext } from "../store/repository";
-import { PdfInfo } from "../types/pdf.type";
 import { TabContext } from "../store/tab";
-
-function DefaultComponent() {
-  const [state, setState] = useState('Hello World');
-  return <div className={"bg-amber-100 size-full"}>{state}</div>
-}
 
 const defaultLayout: LayoutData = {
   dockbox: {
