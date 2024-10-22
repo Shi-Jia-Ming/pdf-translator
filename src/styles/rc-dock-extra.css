@@ -8,13 +8,14 @@
             @apply h-full;
 
             .dock-tab-btn {
-                @apply min-w-28 size-full flex align-middle justify-center p-0;
+                @apply w-[300px] size-full flex align-middle justify-center p-0;
 
                 .drag-initiator {
                     @apply flex justify-center;
                     align-items: center;
                     text-align: center;
-                    width: 100%;
+                    width: 80%;
+                    min-width: 250px;
 
                     .dock-tab-close-btn {
                         top: 0.65rem;

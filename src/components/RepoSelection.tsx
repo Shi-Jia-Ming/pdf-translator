@@ -18,6 +18,7 @@ function RepoItem({name, path, needPath, iconSize, iconColor}: { name: string, p
     )
 }
 
+// TODO check if the workspace is still valid
 export default function RepoSelection({historySpace, addHistorySpace}: {historySpace: Array<{
     name: string,
     path: string

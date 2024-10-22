@@ -374,6 +374,7 @@ dependencies = [
 name = "common-react-tauri"
 version = "0.0.0"
 dependencies = [
+ "base64 0.13.1",
  "serde",
  "serde_json",
  "tauri",
