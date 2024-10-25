@@ -4,7 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import {invoke} from "@tauri-apps/api";
 import {WorkDirectoryContext} from "../store/repository.ts";
 
-export default function Toolbar({ collapseRightPanel }: { collapseRightPanel: () => void }) {
+export default function Toolbar({ collapseRightPanel, isRightPanelCollapsed }: { collapseRightPanel: () => void, isRightPanelCollapsed: boolean }) {
   const [isWindowMaximized, setIsWindowMaximized] = useState<boolean>(false);
 
   const {workspace, workPath} = useContext(WorkDirectoryContext);
@@ -57,7 +57,7 @@ export default function Toolbar({ collapseRightPanel }: { collapseRightPanel: ()
 
   return (
     <div
-      className={"size-full flex justify-between items-center cursor-pointer"} id={"tool-bar"}
+      className={"size-full flex justify-between items-center cursor-pointer border-b border-[#e3e3e3]"} id={"tool-bar"}
       data-tauri-drag-region={"true"}
     >
       <div className={"flex flex-row"} id={"function-area"}>
@@ -69,7 +69,7 @@ export default function Toolbar({ collapseRightPanel }: { collapseRightPanel: ()
         </div>
       </div>
       <div id={"control-button-group-area"} className={"absolute right-0 top-0 h-10 w-auto flex flex-row z-10"}>
-      <div className={"h-10 w-12 flex align-middle justify-center hover:bg-gray-100 active:bg-gray-200"}
+      <div className={`h-10 w-12 flex align-middle justify-center ${isRightPanelCollapsed ? 'hover:bg-gray-100 active:bg-gray-200' : 'bg-gray-300'}`}
              id={"minimize-button-container"}>
           <button className={"size-full flex justify-center items-center"} onClick={collapseRightPanel}>
             <img alt={""} src={"/icons/translate.svg"} className={"size-4"}/>
