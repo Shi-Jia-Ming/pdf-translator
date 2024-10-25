@@ -56,3 +56,7 @@ button:focus-visible {
   -ms-user-select: none;
   user-select: none;
 }
+
+* {
+  animation: none !important;
+}

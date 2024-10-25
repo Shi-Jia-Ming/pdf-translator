@@ -4,7 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import {invoke} from "@tauri-apps/api";
 import {WorkDirectoryContext} from "../store/repository.ts";
 
-export default function Toolbar() {
+export default function Toolbar({ collapseRightPanel }: { collapseRightPanel: () => void }) {
   const [isWindowMaximized, setIsWindowMaximized] = useState<boolean>(false);
 
   const {workspace, workPath} = useContext(WorkDirectoryContext);
@@ -69,11 +69,16 @@ export default function Toolbar() {
         </div>
       </div>
       <div id={"control-button-group-area"} className={"absolute right-0 top-0 h-10 w-auto flex flex-row z-10"}>
+      <div className={"h-10 w-12 flex align-middle justify-center hover:bg-gray-100 active:bg-gray-200"}
+             id={"minimize-button-container"}>
+          <button className={"size-full flex justify-center items-center"} onClick={collapseRightPanel}>
+            <img alt={""} src={"/icons/translate.svg"} className={"size-4"}/>
+          </button>
+        </div>
         <div className={"h-10 w-12 flex align-middle justify-center hover:bg-gray-100 active:bg-gray-200"}
              id={"minimize-button-container"}>
           <button className={"size-full flex justify-center items-center"} onClick={() => {
-            appWindow?.minimize().then(() => {
-            })
+            appWindow?.minimize().then(() => {})
           }}>
             <img alt={""} src={"/icons/minimize.svg"} className={"size-4"}/>
           </button>
@@ -81,7 +86,7 @@ export default function Toolbar() {
         <div className={"h-10 w-12 flex align-middle justify-center hover:bg-gray-100 active:bg-gray-200"}
              id={"maximize-button-container"}>
           <button className={"size-full flex justify-center items-center"} onClick={handleMaximize}>
-            {/* TODO can't listen the maximize when double click the drag area */}
+            {/* TODO can't listen the maximize when double clicking the drag area */}
             <img alt={""} src={isWindowMaximized ? "/icons/scale-min.svg" : "/icons/scale-max.svg"}
                  className={"size-4"}/>
           </button>

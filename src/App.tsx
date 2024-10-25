@@ -12,12 +12,17 @@ import { PdfContext } from "./store/pdf.ts";
 import { TabContext } from "./store/tab.ts";
 
 function App() {
-  const [needAnimation, setNeedAnimation] = useState<boolean>(false);
+  // TODO animation bug
+  const [needAnimationL, setNeedAnimationL] = useState<boolean>(false);
+  const [needAnimationR, setNeedAnimationR] = useState<boolean>(false);
   const [leftPanelSize, setLeftPanelSize] = useState<number>(20);
+  const [rightPanelSize, setRightPanelSize] = useState<number>(20);
 
   const [isLeftPanelCollapsed, setIsLeftPanelCollapsed] = useState<boolean>(false);
+  const [isRightPanelCollapsed, setIsRightPanelCollapsed] = useState<boolean>(false);
 
   const leftPanelRef = useRef<ImperativePanelHandle>(null);
+  const rightPanelRef = useRef<ImperativePanelHandle>(null);
 
   const [workspace, setWorkspace] = useState('');
   const [workPath, setWorkPath] = useState('');
@@ -26,9 +31,9 @@ function App() {
   const [activeTabName, setActiveTabName] = useState<string>('');
 
   const collapseLeftPanel = () => {
-    setNeedAnimation(true);
+    setNeedAnimationL(true);
     setTimeout(() => {
-      setNeedAnimation(false);
+      setNeedAnimationL(false);
     }, 200);
     if (isLeftPanelCollapsed) {
       leftPanelRef.current?.resize(leftPanelSize);
@@ -40,13 +45,28 @@ function App() {
     }
   }
 
+  const collapseRightPanel = () => {
+    setNeedAnimationR(true);
+    setTimeout(() => {
+      setNeedAnimationR(false);
+    }, 200);
+    if (isRightPanelCollapsed) {
+      rightPanelRef.current?.resize(rightPanelSize);
+      setIsRightPanelCollapsed(false);
+    } else {
+      setRightPanelSize(rightPanelRef.current?.getSize() || 20);
+      rightPanelRef.current?.resize(0);
+      setIsRightPanelCollapsed(true);
+    }
+  }
+
   return (
     <WorkDirectoryContext.Provider value={{ workspace, workPath, setWorkspace, setWorkPath }}>
       <PdfContext.Provider value={{ activePdf, setActivePdf }}>
         <TabContext.Provider value={{ activeTabName, setActiveTabName }}>
           <div className={"size-full flex flex-col"} id={"main-window"}>
             <div className={"w-full h-10"} id={"tool-bar-container"}>
-              <Toolbar />
+              <Toolbar collapseRightPanel={collapseRightPanel}/>
             </div>
             <div className={"w-full h-except-10 flex"} id={"app-main"}>
               <div
@@ -65,13 +85,19 @@ function App() {
               <div className={"h-full w-except-12"} id={"app-main"}>
                 <PanelGroup direction="horizontal" className={"size-full"} autoSaveId={"persistence"}>
                   <Panel collapsible defaultSize={leftPanelSize}
-                    className={`transition-width ${needAnimation ? 'duration-200' : ''}`} ref={leftPanelRef}>
+                    className={`${needAnimationL ? 'transition-width duration-200' : 'transition-none'}`} ref={leftPanelRef}>
                     <Sidebar />
                   </Panel>
                   <PanelResizeHandle
                     className={"hover:bg-purple-500 active:bg-purple-500 transition-colors duration-300"} />
-                  <Panel defaultSize={80}>
+                  <Panel className={"flex-1"}>
                     <MainView />
+                  </Panel>
+                  <PanelResizeHandle
+                    className={"hover:bg-purple-500 active:bg-purple-500 transition-colors duration-300"} />
+                  <Panel collapsible defaultSize={rightPanelSize}
+                    className={`${needAnimationR ? 'transition-width duration-200' : ''}`} ref={rightPanelRef}>
+                      <div className={"w-full h-full bg-gray-100"}></div>
                   </Panel>
                 </PanelGroup>
               </div>
