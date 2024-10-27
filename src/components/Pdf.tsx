@@ -99,7 +99,7 @@ export default function Pdf({ url }: { url: string }) {
   };
 
   return (
-    <div className={"App flex h-full"}>
+    <div className={"App flex size-full"}>
       <div className={"h-full w-full relative"}>
         {pdfUrl === '' ? <div /> : (
           <PdfLoader url={pdfUrl} beforeLoad={<div />}>
