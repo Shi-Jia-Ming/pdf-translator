@@ -45,9 +45,13 @@ const DockGroup = forwardRef<DockGroupRef, DockGroupProps>((props: DockGroupProp
   useImperativeHandle(ref, () => ({
     addTab(newTab: TabContent) {
       if (newTab) {
-        newTab.index = tabs.length;
-        setTabs([...tabs, newTab]);
-        setSelectedTab(newTab);
+        if (tabs.find((tab) => tab.label === newTab.label)) {
+          setSelectedTab(tabs.find((tab) => tab.label === newTab.label) as TabContent);
+        } else {
+          newTab.index = tabs.length;
+          setTabs([...tabs, newTab]);
+          setSelectedTab(newTab);
+        }
       }
     },
     removeTab(tab: TabContent) {
@@ -86,7 +90,7 @@ const DockGroup = forwardRef<DockGroupRef, DockGroupProps>((props: DockGroupProp
           <AddIcon />
         </motion.button>
       </nav>
-      <main className={"flex justify-center items-center font-[128px] flex-grow select-none"}>
+      <main className={"flex justify-center items-center flex-grow select-text text-base"}>
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedTab ? selectedTab.label : "empty"}
@@ -96,7 +100,7 @@ const DockGroup = forwardRef<DockGroupRef, DockGroupProps>((props: DockGroupProp
             transition={{ duration: 0.15 }}
             className={"size-full flex justify-center items-center"}
           >
-            {selectedTab ? selectedTab.content : "😋"}
+            {selectedTab ? selectedTab.content : <span className={"text-[128px] select-none"}>😋</span>}
           </motion.div>
         </AnimatePresence>
       </main>
