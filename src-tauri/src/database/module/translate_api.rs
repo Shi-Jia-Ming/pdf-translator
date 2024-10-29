@@ -3,10 +3,10 @@ use serde::Serialize;
 
 #[derive(Serialize, Debug)]
 pub struct TranslateAPI {
-    id: i32,
-    name: String,
-    url: String,
-    token: String
+    pub(crate) id: i32,
+    pub(crate) name: String,
+    pub(crate) url: String,
+    pub(crate) token: String
 }
 
 pub fn init_translate_table(connection: &Connection) -> rusqlite::Result<()> {
@@ -41,7 +41,10 @@ pub fn update_translate_api(connection: &Connection, id: i32, name: &str, url: &
 pub fn get_translate_api(connection: &Connection, id: i32) -> Result<TranslateAPI> {
     let mut stmt = connection.prepare("SELECT * FROM translate WHERE id = ?1")?;
     let mut rows = stmt.query([id])?;
-    let row = rows.next()?.unwrap();
+    let row = match rows.next()? {
+        None => {return Err(rusqlite::Error::QueryReturnedNoRows)},
+        Some(row) => {row}
+    };
     Ok(TranslateAPI {
         id: row.get(0)?,
         name: row.get(1)?,

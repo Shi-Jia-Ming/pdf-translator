@@ -1,6 +1,5 @@
 import {useRef, useState} from "react";
 import "./styles/global.css";
-import "./styles/rc-dock-extra.css";
 import MainView from "./components/MainView";
 import Sidebar from "./components/Sidebar";
 import {WorkDirectoryContext} from "./store/repository";
