@@ -1,10 +1,10 @@
-import { motion, Reorder, AnimatePresence } from "framer-motion";
-import { forwardRef, useImperativeHandle, useState } from "react";
-import { Tab } from "./Tab";
-import { TabContent } from "../../types/tab.type";
-import { removeItem, closestItem } from "../../utils/array-utils";
-import { AddIcon } from "../../icons/AddIcon";
-import { DefaultTabContent } from "./DefaultTabContent";
+import {motion, Reorder, AnimatePresence} from "framer-motion";
+import {forwardRef, useImperativeHandle, useState} from "react";
+import {Tab} from "./Tab";
+import {TabContent} from "../../types/tab.type";
+import {removeItem, closestItem} from "../../utils/array-utils";
+import {AddIcon} from "../../icons/AddIcon";
+import {DefaultTabContent} from "./DefaultTabContent";
 import "../../styles/dock.css";
 
 interface DockGroupProps {
@@ -33,7 +33,7 @@ const DockGroup = forwardRef<DockGroupRef, DockGroupProps>((props: DockGroupProp
     const nextTab: TabContent = {
       index: tabs.length,
       label: "Untitled",
-      content: <DefaultTabContent />,
+      content: <DefaultTabContent/>,
     };
 
     if (nextTab) {
@@ -85,19 +85,19 @@ const DockGroup = forwardRef<DockGroupRef, DockGroupProps>((props: DockGroupProp
         <motion.button
           className="add-item flex justify-center items-center"
           onClick={add}
-          whileTap={{ scale: 0.9 }}
+          whileTap={{scale: 0.9}}
         >
-          <AddIcon />
+          <AddIcon/>
         </motion.button>
       </nav>
       <main className={"flex justify-center items-center flex-grow select-text text-base"}>
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedTab ? selectedTab.label : "empty"}
-            animate={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 20 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.15 }}
+            animate={{opacity: 1, y: 0}}
+            initial={{opacity: 0, y: 20}}
+            exit={{opacity: 0, y: -20}}
+            transition={{duration: 0.15}}
             className={"size-full flex justify-center items-center"}
           >
             {selectedTab ? selectedTab.content : <span className={"text-[128px] select-none"}>😋</span>}
@@ -106,8 +106,7 @@ const DockGroup = forwardRef<DockGroupRef, DockGroupProps>((props: DockGroupProp
       </main>
     </div>
   )
-}
-);
+});
 
 DockGroup.displayName = "DockGroup";
 export default DockGroup;

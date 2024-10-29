@@ -44,3 +44,8 @@ pub fn get_pdf_list(path: &str) -> Vec<PdfInfo> {
 
     pdf_list
 }
+
+#[command]
+pub fn init_highlight_dir(path: &str) {
+    let highlight_dir = get_config_path(path);
+}
