@@ -15,6 +15,9 @@ export default {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
+      },
+      colors: {
+        custom: "#2979ff",
       }
     }
   },

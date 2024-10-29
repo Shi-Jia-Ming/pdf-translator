@@ -1,5 +1,5 @@
 import {invoke} from "@tauri-apps/api";
-import {memo, useCallback, useEffect, useRef, useState} from "react";
+import {memo, useCallback, useContext, useEffect, useRef, useState} from "react";
 import {
   AreaHighlight,
   Content,
@@ -14,6 +14,7 @@ import {
 } from "react-pdf-highlighter";
 import "react-pdf-highlighter/dist/style.css";
 import {percentToNumber, scaleDown, scaleUp} from "../utils/string-utils";
+import {SelectedWordContext} from "../store/selected.ts";
 
 function base64ToBlob(code: string) {
   code = code.replace(/[\n\r]/g, '');
@@ -133,6 +134,8 @@ const Pdf = memo(({url}: { url: string }) => {
     );
   };
 
+  const {setSelectedWord} = useContext(SelectedWordContext);
+
   return (
     <div className={"App flex size-full flex-col"}>
       <div className={"w-full h-10 z-10 bg-gray-100 flex justify-center items-center"}>
@@ -171,15 +174,20 @@ const Pdf = memo(({url}: { url: string }) => {
                   scrollViewerTo.current = scrollTo;
                   scrollToHighlightFromHash();
                 }}
-                onSelectionFinished={(position, content, hideTipAndSelection, transfromSelection) => (
-                  <Tip
-                    onOpen={transfromSelection}
-                    onConfirm={(comment) => {
-                      addHighlight({content, position, comment});
-                      hideTipAndSelection();
-                    }}
-                  />
-                )}
+                onSelectionFinished={(position, content, hideTipAndSelection, transfromSelection) => {
+                  if (content.text != null) {
+                    setSelectedWord(content.text);
+                  }
+                  return (
+                    <Tip
+                      onOpen={transfromSelection}
+                      onConfirm={(comment) => {
+                        addHighlight({content, position, comment});
+                        hideTipAndSelection();
+                      }}
+                    />
+                  )
+                }}
                 highlightTransform={(
                   highlight, index, setTip, hideTip, viewportToScaled, screenshot, isScrolledTo
                 ) => {

@@ -41,7 +41,7 @@ export default function FileList() {
 
   return (
     <div className={"size-full flex justify-start items-start flex-col"}>
-      <div className={"h-12 w-full p-2 flex justify-between items-center pl-2 pr-4"}>
+      <div className={"h-12 w-full p-2 flex justify-between items-center pr-4"}>
         <div id={"title"} className={"text-sm connot-select overflow-hide"}>PDF文件列表</div>
         <div id={"toolbar"}>{/* TODO */}</div>
       </div>

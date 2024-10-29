@@ -63,7 +63,7 @@ export default function RepoSelection({historySpace, addHistorySpace}: {historyS
       <PopoverPanel
         transition
         anchor={"bottom start"}
-        className={"divide-y divide-white/5 bg-white text-sm/6 border border-black-100 rounded-lg p-2 w-[300px] shadow-lg transition duration-200 ease-in-out  [--anchor-gap:var(--spacing-5)] data-[closed]:translate-y-1 data-[closed]:opacity-0"}>
+        className={"divide-y divide-white/5 bg-white text-sm/6 border border-black-100 rounded-lg p-2 w-[300px] shadow-lg transition duration-200 ease-in-out  [--anchor-gap:var(--spacing-5)] data-[closed]:translate-y-1 data-[closed]:opacity-0 z-20"}>
         {({close}) => (
           <div className={"divide-y divide-solid"}>
             <button
