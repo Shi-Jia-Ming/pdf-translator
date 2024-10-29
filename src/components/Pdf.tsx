@@ -41,7 +41,8 @@ const HighlightPopup = ({comment}: { comment: { text: string, emoji: string } })
 
 
 // initial value of highlights
-const highlights: Array<IHighlight> = [];
+// @ts-ignore
+const _highlights: Array<IHighlight> = [];
 
 const getNextId = () => String(Math.random()).slice(2);
 
@@ -55,11 +56,12 @@ const Pdf = memo(({url}: { url: string }) => {
 
   const [pdfUrl, setPdfUrl] = useState<string>('');
 
-  const resetHighlights = () => {
+  // @ts-ignore
+  const _resetHighlights = () => {
     setHighlights([]);
   };
 
-  const scrollViewerTo = useRef((highlight: IHighlight) => {
+  const scrollViewerTo = useRef((_highlight: IHighlight) => {
   });
 
   const scrollToHighlightFromHash = useCallback(() => {
@@ -102,6 +104,7 @@ const Pdf = memo(({url}: { url: string }) => {
     });
   }, [url]);
 
+  // @ts-ignore
   const getHighlightById = (id: string) => {
     return highlights.find((highlight) => highlight.id === id);
   };
@@ -216,7 +219,7 @@ const Pdf = memo(({url}: { url: string }) => {
                   return (
                     <Popup
                       popupContent={<HighlightPopup {...highlight} />}
-                      onMouseOver={(popupContent) => setTip(highlight, (highlight) => popupContent)}
+                      onMouseOver={(popupContent) => setTip(highlight, (_highlight) => popupContent)}
                       onMouseOut={hideTip}
                       key={index}
                       children={component}

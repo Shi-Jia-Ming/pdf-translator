@@ -137,7 +137,7 @@ const PanelGroup = forwardRef<PanelGroupRef, PanelGroupProps>((props: PanelGroup
           <AnimatePresence>
             <motion.div
               id={"left-dragger"}
-              className={"bg-blue-500 w-[5px] h-full cursor-col-resize select-none absolute right-0"}
+              className={"bg-blue-500 w-[5px] h-full cursor-col-resize select-none absolute right-0 z-50"}
               onMouseDown={handleLeftDraggerMouseDown}
               onMouseEnter={() => { setIsLeftDraggerHovered(true) }}
               onMouseLeave={() => { setIsLeftDraggerHovered(false) }}
@@ -156,7 +156,7 @@ const PanelGroup = forwardRef<PanelGroupRef, PanelGroupProps>((props: PanelGroup
           <AnimatePresence>
             <motion.div
               id={"right-dragger"}
-              className={"bg-blue-500 w-[5px] h-full cursor-col-resize select-none absolute right-0"}
+              className={"bg-blue-500 w-[5px] h-full cursor-col-resize select-none absolute right-0 z-50"}
               onMouseDown={handleRightDraggerMouseDown}
               onMouseEnter={() => { setIsRightDraggerHovered(true) }}
               onMouseLeave={() => { setIsRightDraggerHovered(false) }}

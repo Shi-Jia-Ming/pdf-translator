@@ -2,6 +2,7 @@ import {SelectedWordContext} from "../store/selected.ts";
 import {useContext, useEffect, useState} from "react";
 import Toggle from "./Toggle.tsx";
 import {Popover, PopoverButton, PopoverPanel} from "@headlessui/react";
+import TranslateService from "../service/translate.service.ts";
 
 function LockTip() {
   return (
@@ -26,6 +27,7 @@ export default function TranslateBar() {
 
   const {selectedWord} = useContext(SelectedWordContext);
 
+  const [translatedWord, setTranslatedWord] = useState<string>('');
   const [wordToTranslate, setWordToTranslate] = useState<string>('');
   const [isWordLocked, setIsWordLocked] = useState<boolean>(false);
 
@@ -34,6 +36,12 @@ export default function TranslateBar() {
       setWordToTranslate(selectedWord);
     }
   }, [selectedWord]);
+
+  useEffect(() => {
+    TranslateService.translate(wordToTranslate).then((res) => {
+      setTranslatedWord(res);
+    });
+  }, [wordToTranslate]);
 
   return (
     <div id={"translate-bar"} className={"bg-gray-100 size-full p-2"}>
@@ -55,6 +63,7 @@ export default function TranslateBar() {
                 <span className={"text-sm text-gray-600"}>复制</span>
               </button>
             </div>
+            <div id={"translate-content"} className={"font-mono"}>{translatedWord}</div>
           </div>
         </div>
         <div id={"origin=container"} className={"h-1/2"}>
