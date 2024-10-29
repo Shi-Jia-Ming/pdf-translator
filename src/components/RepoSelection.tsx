@@ -19,10 +19,10 @@ function RepoItem({name, path, needPath, iconSize, iconColor}: { name: string, p
 }
 
 // TODO check if the workspace is still valid
-export default function RepoSelection({historySpace, addHistorySpace}: {historySpace: Array<{
+export default function RepoSelection({historySpace, addHistorySpace, className}: {historySpace: Array<{
     name: string,
     path: string
-  }>, addHistorySpace: Function}) {
+  }>, addHistorySpace: Function, className?: string}) {
   const {workspace, workPath, setWorkspace, setWorkPath} = useContext(WorkDirectoryContext);
 
   async function selectWorkspace(close: Function) {
@@ -49,7 +49,7 @@ export default function RepoSelection({historySpace, addHistorySpace}: {historyS
   }
 
   return (
-    <Popover className={"relative size-full"}>
+    <Popover className={`relative size-full ${className}`}>
       <PopoverButton id={"repo-selection"}
                      className={"rounded-lg h-full flex justify-start items-center hover:bg-gray-200 active:bg-gray-300"}>
         <div id={"repo-name"}

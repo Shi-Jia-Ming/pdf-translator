@@ -60,17 +60,29 @@ export default function Toolbar({ collapseRightPanel, isRightPanelCollapsed }: {
       className={"size-full flex justify-between items-center cursor-pointer border-b border-[#e3e3e3]"} id={"tool-bar"}
       data-tauri-drag-region={"true"}
     >
-      <div className={"flex flex-row"} id={"function-area"}>
+      <div className={"flex flex-row"} id={"left-area"}>
         <div className={"h-7 w-7 flex items-center justify-center ml-2 mr-1"} id={"app-icon"}>
           <img alt={""} src={"/icon.png"} className={"size-4"}/>
         </div>
-        <div className={"h-7"}>
-          <RepoSelection historySpace={historySpace} addHistorySpace={addHistorySpace}/>
+        <div className={"flex divide-x divide-solid"}>
+          <div id={"repo-selection"} className={"h-7"}>
+            <RepoSelection historySpace={historySpace} addHistorySpace={addHistorySpace} className={"pr-4"}/>
+          </div>
+          <div id={"button-group"} className={"pl-2"}>
+            <div id={"setting-button"}>
+              <button className={"h-7 w-7 flex justify-center items-center"} onClick={() => {
+                invoke('open_setting_window').then(() => {})
+              }}>
+                <img alt={""} src={"/icons/gearshape.svg"} className={"size-5"}/>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div id={"control-button-group-area"} className={"absolute right-0 top-0 h-10 w-auto flex flex-row z-10"}>
-      <div className={`h-10 w-12 flex align-middle justify-center ${isRightPanelCollapsed ? 'hover:bg-gray-100 active:bg-gray-200' : 'bg-gray-300'}`}
-             id={"minimize-button-container"}>
+        <div
+            className={`h-10 w-12 flex align-middle justify-center ${isRightPanelCollapsed ? 'hover:bg-gray-100 active:bg-gray-200' : 'bg-gray-300'}`}
+            id={"minimize-button-container"}>
           <button className={"size-full flex justify-center items-center"} onClick={collapseRightPanel}>
             <img alt={""} src={"/icons/translate.svg"} className={"size-4"}/>
           </button>
